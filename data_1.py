@@ -11,7 +11,7 @@ with open('config.json') as f:
 
 #2024년 3월 1일 기준으로 과거 50주간의 데이터를 뽑아오기
 #주간(월~일)까지 데이터 조회 weekGb=0
-#다양한 영화/상업 영화 모두 포함. 한국/외국 영화 모두 포함. 모든 상영지역 포함.
+#다양한 영화/상업 영화. 한국/외국 영화. 모든 상영지역.
 for i in range(50):
   key = config['KEY']
   targetDt = datetime(2024,3,1) - timedelta(weeks=i)
@@ -25,10 +25,21 @@ for i in range(50):
   
   for movie in movies:
       code = movie.get("movieCd")
+      # 날짜를 거꾸로 돌아가면서 데이터를 얻기 때문에, 기존에 이미 영화코드가 들어간다면,
+      # 그게 마지막 주 자료이다. 즉, 기존 영화코드가 있다면 딕셔너리에 넣지 않는다.
       if code not in result:
+          # result 라는 딕셔너리에 code에 해당하는 키가 없을 경우에만 if문을 들어간다.
           result[code] = {
-              'id' : movie.get("movieCd"),
-              'title' : movie.get("movieNm"),
-              'release_date' : movie.get("openDt"),
-              'audience': movie.get("audiAcc")
+              '코드' : movie.get("movieCd"),
+              '제목' : movie.get("movieNm"),
+              '개봉일' : movie.get("openDt"),
+              '관중수': movie.get("audiAcc")
           }
+          
+#with open('boxoffice.csv', 'w', encoding='utf-8', newline='') as f:
+#    fieldnames = ('movieCd', 'movieNm', 'openDt', 'audiAcc')
+#    writer = csv.DictWriter(f, fieldnames=fieldnames)
+#    writer.writeheader()
+#    for value in result.values():
+#        # print(value)
+#        writer.writerow(value)
