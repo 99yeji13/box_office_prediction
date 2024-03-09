@@ -1,4 +1,4 @@
-#50주간의 박스오피스 데이터(영화코드, 영화명, 누적관객수)를 저장하여 boxoffice.csv파일에 저장
+#50주간의 박스오피스 데이터(영화코드, 영화명, 누적관객수)를 저장하여 boxoffice.csv파일에 저장하기
 import requests
 import json
 from datetime import datetime, timedelta
@@ -25,10 +25,10 @@ for i in range(50):
   
   for movie in movies:
       code = movie.get("movieCd")
-      # 날짜를 거꾸로 돌아가면서 데이터를 얻기 때문에, 기존에 이미 영화코드가 들어간다면,
-      # 그게 마지막 주 자료이다. 즉, 기존 영화코드가 있다면 딕셔너리에 넣지 않는다.
+      #날짜를 거꾸로 돌아가면서 데이터를 얻는다.
+      #이미 영화코드가 들어가있다면 그게 마지막 주 자료며, 딕셔너리에 넣지 않는다.
       if code not in result:
-          # result 라는 딕셔너리에 code에 해당하는 키가 없을 경우에만 if문을 들어간다.
+          #영화코드명을 key로 가지는 딕셔너리 내부에 필요한 정보들(영화코드, 제목, 개봉일, 관중수)을 가지는 딕셔너리를 생성하기
           result[code] = {
               '코드' : movie.get("movieCd"),
               '제목' : movie.get("movieNm"),
