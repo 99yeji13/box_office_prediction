@@ -3,6 +3,7 @@ import requests
 import json
 from datetime import datetime, timedelta
 import pandas as pd
+import csv
 
 result = {}
 
@@ -36,10 +37,9 @@ for i in range(50):
               '관중수': movie.get("audiAcc")
           }
           
-#with open('boxoffice.csv', 'w', encoding='utf-8', newline='') as f:
-#    fieldnames = ('movieCd', 'movieNm', 'openDt', 'audiAcc')
-#    writer = csv.DictWriter(f, fieldnames=fieldnames)
-#    writer.writeheader()
-#    for value in result.values():
-#        # print(value)
-#        writer.writerow(value)
+with open('boxoffice.csv', 'w', encoding = 'utf-8', newline = '') as f:
+    fieldnames = ('movieCd', 'movieNm', 'openDt', 'audiAcc')
+    writer = csv.DictWriter(f, fieldnames = fieldnames)
+    writer.writeheader()
+    for value in result.values():
+        writer.writerow(value)
