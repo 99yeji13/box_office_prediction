@@ -37,7 +37,7 @@ for i in range(50):
           }
           
 with open('boxoffice.csv', 'w', encoding = 'utf-8', newline = '') as f:
-    fieldnames = ('movieCd', 'movieNm', 'audiAcc')
+    fieldnames = ('영화대표코드', '영화제목', '해당일누적관객수')
     writer = csv.DictWriter(f, fieldnames = fieldnames)
     writer.writeheader()
     for value in result.values():
