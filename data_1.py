@@ -27,18 +27,17 @@ for i in range(50):
   for movie in movies:
       code = movie.get("movieCd")
       #날짜를 거꾸로 돌아가면서 데이터를 얻는다.
-      #이미 영화코드가 들어가있다면 그게 마지막 주 자료며, 딕셔너리에 넣지 않는다.
+      #이미 영화코드가 들어가있다면 그게 마지막 주 자료이며, 딕셔너리에 넣지 않는다.
       if code not in result:
-          #영화코드명을 key로 가지는 딕셔너리 내부에 필요한 정보들(영화코드, 제목, 개봉일, 관중수)을 가지는 딕셔너리를 생성하기
+          #영화코드명을 key로 가지는 딕셔너리 내부에 필요한 정보들(영화코드, 제목, 관중수)을 가지는 딕셔너리를 생성하기
           result[code] = {
-              '코드' : movie.get("movieCd"),
-              '제목' : movie.get("movieNm"),
-              '개봉일' : movie.get("openDt"),
-              '관중수': movie.get("audiAcc")
+              '영화대표코드' : movie.get("movieCd"),
+              '영화제목' : movie.get("movieNm"),
+              '해당일누적관객수': movie.get("audiAcc")
           }
           
 with open('boxoffice.csv', 'w', encoding = 'utf-8', newline = '') as f:
-    fieldnames = ('movieCd', 'movieNm', 'openDt', 'audiAcc')
+    fieldnames = ('movieCd', 'movieNm', 'audiAcc')
     writer = csv.DictWriter(f, fieldnames = fieldnames)
     writer.writeheader()
     for value in result.values():
