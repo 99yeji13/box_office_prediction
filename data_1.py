@@ -1,5 +1,5 @@
 #영화진흥위원회 OPEN API 이용
-#50주간의 박스오피스 데이터(영화코드, 제목, 누적관객수)를 저장하여 boxoffice.csv파일에 저장하기
+#50주간의 박스오피스 데이터(영화코드, 제목, 누적관객수)를 boxoffice.csv파일에 저장
 import requests
 import json
 from datetime import datetime, timedelta

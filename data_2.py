@@ -1,14 +1,12 @@
-#네이버 웹 크롤링(스크래핑)
-#boxoffice.csv 파일의 영화제목으
+#영화진흥위원회 OPEN API 이용
+#박스오피스 영화코드를 이용해 영화정보(개봉일, 상영시간, 관람등급, 국가)를 movie.csv에 저장
 import requests
 import json
 import csv
 from pprint import pprint
 
-# 1 csv.DictReader() _ boxoffice에서 영화제목 읽어오기
 with open('boxoffice.csv', newline='', encoding='utf-8') as f:
-    reader = csv.DictReader(f) # 읽어올 파일만 입력 => reader에 파일이 들어있음
-    # 한 줄씩 읽는다.
+    reader = csv.DictReader(f)
     movie_Cd=[]
     for row in reader:
         movie_Cd.append(row['영화대표코드'])
@@ -23,7 +21,7 @@ for code in movie_Cd:
     movieCd = code
 
     url = f'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key={key}&movieCd={movieCd}'
-    api_data = requests.get(url).json() # 크롬에서 보이는 것과 같은 모습으로 표현해줌
+    api_data = requests.get(url).json()
 
     movies_info = api_data.get('movieInfoResult').get('movieInfo')
     
