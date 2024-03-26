@@ -19,3 +19,4 @@ for name in movie_Nm:
     web_data = requests.get(url).text
     
     soup = BeautifulSoup(web_data, "html5lib")
+    print(soup)
